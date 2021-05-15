@@ -1,5 +1,3 @@
-//go 1.10.4
-
 package main
 
 import (
@@ -14,7 +12,6 @@ func main() {
 	moves := 0
 	finish := false
 
-	// grid := [r+1][c+1]int{}
 	grid := make([][]int, r+1)
 	steps := make([][]int, r+1)
 
@@ -30,6 +27,7 @@ func main() {
 			}
 		}
 	}
+
 	for ri := 0; ri <= r; ri++ {
 		for ci := 0; ci <= c; ci++ {
 			if grid[ri][ci] == -1 {
