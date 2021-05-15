@@ -29,8 +29,13 @@ func main() {
 		if key == tcell.KeyEnter {
 			table.SetSelectable(true, true)
 		}
-	}).SetSelectedFunc(func(row int, column int) {
-		table.GetCell(row, column).SetTextColor(tcell.ColorRed)
+	}).SetSelectedFunc(func(ri int, ci int) {
+		key := grid[ri][ci]
+		char := fmt.Sprintf(" %d ", key)
+		if key == -1 {
+			char = " B "
+		}
+		table.GetCell(ri, ci).SetTextColor(tcell.ColorRed).SetText(char)
 		// table.SetSelectable(false, false)
 	})
 	if err := app.SetRoot(table, true).EnableMouse(true).Run(); err != nil {
