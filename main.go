@@ -4,13 +4,16 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
+
+	"github.com/gdamore/tcell/v2"
+	"github.com/rivo/tview"
 )
 
 func main() {
 	r := 9
 	c := 9
-	moves := 0
-	finish := false
+	// moves := 0
+	// finish := false
 
 	grid := make([][]int, r+1)
 	steps := make([][]int, r+1)
@@ -71,10 +74,28 @@ func main() {
 		}
 	}
 
-	//fmt.Println(grid)
+	app := tview.NewApplication()
+	table := tview.NewTable().SetBorders(true)
 
-	for !finish {
-		moves++
+	for ri := 0; ri <= r; ri++ {
+		for ci := 0; ci <= c; ci++ {
+			table.SetCell(ri, ci, tview.NewTableCell(fmt.Sprintf("%d:%d", ri*10, ci)))
+		}
+	}
+
+	table.Select(0, 0).SetFixed(1, 1).SetDoneFunc(func(key tcell.Key) {
+		if key == tcell.KeyEscape {
+			app.Stop()
+		}
+		if key == tcell.KeyEnter {
+			table.SetSelectable(true, true)
+		}
+	}).SetSelectedFunc(func(row int, column int) {
+		table.GetCell(row, column).SetTextColor(tcell.ColorRed)
+		table.SetSelectable(false, false)
+	})
+	if err := app.SetRoot(table, true).EnableMouse(true).Run(); err != nil {
+		panic(err)
 	}
 
 	fmt.Println("Helloww World")
