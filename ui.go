@@ -21,7 +21,7 @@ func RenderSteps(r int, c int, grid [][]int, steps [][]int, table *tview.Table) 
 			value := grid[ri][ci]
 			visible := steps[ri][ci]
 			if visible == 1 {
-				text := fmt.Sprintf("%d", value)
+				text := fmt.Sprintf(" %d ", value)
 				if value == -1 {
 					text = " B "
 				} else if value == 0 {

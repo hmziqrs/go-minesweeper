@@ -34,6 +34,10 @@ func main() {
 		key := grid[ri][ci]
 		if key == -1 {
 			gameover = true
+		} else if key > 0 {
+			steps[ri][ci] = 1
+		} else {
+			CalculatePaths(ri, ci, r, c, grid, steps)
 		}
 		if gameover {
 			ShowAllMines(r, c, grid, steps)

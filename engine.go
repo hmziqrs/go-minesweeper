@@ -73,3 +73,45 @@ func ShowAllMines(r int, c int, grid [][]int, steps [][]int) {
 		}
 	}
 }
+
+func CalculatePaths(sri int, sci int, r int, c int, grid [][]int, steps [][]int) {
+	if sri > 0 {
+		for ri := sri; ri >= 0; ri-- {
+			key := grid[ri][sci]
+			if key != 0 {
+				break
+			}
+			steps[ri][sci] = 1
+		}
+	}
+
+	if sri < r {
+		for ri := sri; ri <= r; ri++ {
+			key := grid[ri][sci]
+			if key != 0 {
+				break
+			}
+			steps[ri][sci] = 1
+		}
+	}
+
+	if sci > 0 {
+		for ci := sci; ci >= 0; ci-- {
+			key := grid[sri][ci]
+			if key != 0 {
+				break
+			}
+			steps[sri][ci] = 1
+		}
+	}
+
+	if sci < c {
+		for ci := sci; ci <= c; ci++ {
+			key := grid[sri][ci]
+			if key != 0 {
+				break
+			}
+			steps[sri][ci] = 1
+		}
+	}
+}
