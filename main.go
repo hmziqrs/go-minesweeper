@@ -38,6 +38,8 @@ func main() {
 		if gameover {
 			ShowAllMines(r, c, grid, steps)
 		}
+		RenderSteps(r, c, grid, steps, table)
+
 		// 		key := grid[ri][ci]
 		// char := fmt.Sprintf(" %d ", key)
 		// if key == -1 {
