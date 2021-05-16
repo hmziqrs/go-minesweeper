@@ -25,38 +25,17 @@ func GenerateGrid(r int, c int, grid [][]int, steps [][]int) {
 				continue
 			}
 			count := 0
-			// Here we compute
-			fc := ci > 0
-			lc := ci < c
-			fr := ri > 0
-			lr := ri < r
-			pci := ci - 1
-			pri := ri - 1
-			nci := ci + 1
-			nri := ri + 1
-			if fc && fr && grid[pri][pci] == -1 {
-				count++
-			}
-			if fc && grid[ri][pci] == -1 {
-				count++
-			}
-			if fc && lr && grid[nri][pci] == -1 {
-				count++
-			}
-			if fr && grid[pri][ci] == -1 {
-				count++
-			}
-			if lr && grid[nri][ci] == -1 {
-				count++
-			}
-			if fr && lc && grid[pri][nci] == -1 {
-				count++
-			}
-			if lc && grid[ri][nci] == -1 {
-				count++
-			}
-			if lc && lr && grid[nri][nci] == -1 {
-				count++
+			for nri := -1; nri <= 1; nri++ {
+				for nci := -1; nci <= 1; nci++ {
+					cri := ri + nri
+					cci := ci + nci
+					if cri < 0 || cri > r || cci < 0 || cci > c || (cri == 0 && cci == 0) {
+						continue
+					}
+					if grid[cri][cci] == -1 {
+						count++
+					}
+				}
 			}
 			grid[ri][ci] = count
 		}
