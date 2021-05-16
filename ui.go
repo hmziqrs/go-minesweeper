@@ -32,3 +32,10 @@ func RenderSteps(r int, c int, grid [][]int, steps [][]int, table *tview.Table) 
 		}
 	}
 }
+
+// func DifficultySelectModal() *tview.Modal {
+// 	// modal := tview.NewModal().SetText("Select difficulty").AddButtons(Difficulties)
+
+// 	// return modal
+
+// }
