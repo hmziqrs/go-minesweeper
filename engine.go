@@ -78,40 +78,154 @@ func CalculatePaths(sri int, sci int, r int, c int, grid [][]int, steps [][]int)
 	if sri > 0 {
 		for ri := sri; ri >= 0; ri-- {
 			key := grid[ri][sci]
-			if key != 0 {
+			if key == -1 {
 				break
 			}
 			steps[ri][sci] = 1
+			if key > 0 {
+				break
+			}
+
+			if sci > 0 {
+				for ci := sci; ci >= 0; ci-- {
+					key := grid[ri][ci]
+					if key == -1 {
+						break
+					}
+					steps[ri][ci] = 1
+					if key > 0 {
+						break
+					}
+				}
+			}
+
+			if sci < c {
+				for ci := sci; ci <= c; ci++ {
+					key := grid[ri][ci]
+					if key == -1 {
+						break
+					}
+					steps[ri][ci] = 1
+					if key > 0 {
+						break
+					}
+				}
+			}
 		}
 	}
 
 	if sri < r {
 		for ri := sri; ri <= r; ri++ {
 			key := grid[ri][sci]
-			if key != 0 {
+			if key == -1 {
 				break
 			}
 			steps[ri][sci] = 1
+			if key > 0 {
+				break
+			}
+
+			if sci > 0 {
+				for ci := sci; ci >= 0; ci-- {
+					key := grid[ri][ci]
+					if key == -1 {
+						break
+					}
+					steps[ri][ci] = 1
+					if key > 0 {
+						break
+					}
+				}
+			}
+
+			if sci < c {
+				for ci := sci; ci <= c; ci++ {
+					key := grid[ri][ci]
+					if key == -1 {
+						break
+					}
+					steps[ri][ci] = 1
+					if key > 0 {
+						break
+					}
+				}
+			}
 		}
 	}
 
 	if sci > 0 {
 		for ci := sci; ci >= 0; ci-- {
 			key := grid[sri][ci]
-			if key != 0 {
+			if key == -1 {
 				break
 			}
 			steps[sri][ci] = 1
+			if key > 0 {
+				break
+			}
+
+			if sri > 0 {
+				for ri := sri; ri >= 0; ri-- {
+					key := grid[ri][ci]
+					if key == -1 {
+						break
+					}
+					steps[ri][ci] = 1
+					if key > 0 {
+						break
+					}
+				}
+			}
+			if sri < r {
+				for ri := sri; ri <= r; ri++ {
+					key := grid[ri][ci]
+					if key == -1 {
+						break
+					}
+					steps[ri][ci] = 1
+					if key > 0 {
+						break
+					}
+				}
+			}
 		}
 	}
 
 	if sci < c {
 		for ci := sci; ci <= c; ci++ {
 			key := grid[sri][ci]
-			if key != 0 {
+			if key == -1 {
 				break
 			}
 			steps[sri][ci] = 1
+			if key > 0 {
+				break
+			}
+
+			if sri > 0 {
+				for ri := sri; ri >= 0; ri-- {
+					key := grid[ri][ci]
+					if key == -1 {
+						break
+					}
+					steps[ri][ci] = 1
+					if key > 0 {
+						break
+					}
+				}
+			}
+			if sri < r {
+				for ri := sri; ri <= r; ri++ {
+					key := grid[ri][ci]
+					if key == -1 {
+						break
+					}
+					steps[ri][ci] = 1
+					if key > 0 {
+						break
+					}
+				}
+			}
 		}
 	}
 }
