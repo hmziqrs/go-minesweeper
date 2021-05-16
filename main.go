@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 
-	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 )
 
@@ -11,8 +10,8 @@ func main() {
 	r := 9
 	c := 9
 	gameover := false
-	// moves := 0
-	// finish := false
+	moves := 0
+	// didWon := false
 
 	grid := make([][]int, r+1)
 	steps := make([][]int, r+1)
@@ -25,12 +24,8 @@ func main() {
 	RenderGrid(r, c, table)
 
 	table.SetSelectable(true, true)
-
-	table.Select(0, 0).SetFixed(1, 1).SetDoneFunc(func(key tcell.Key) {
-		if key == tcell.KeyEnter {
-			table.SetSelectable(true, true)
-		}
-	}).SetSelectedFunc(func(ri int, ci int) {
+	table.Select(0, 0).SetFixed(1, 1).SetSelectedFunc(func(ri int, ci int) {
+		moves++
 		key := grid[ri][ci]
 		if key == -1 {
 			gameover = true
@@ -44,6 +39,7 @@ func main() {
 		}
 		RenderSteps(r, c, grid, steps, table)
 	})
+
 	if err := app.SetRoot(table, true).EnableMouse(true).Run(); err != nil {
 		panic(err)
 	}
