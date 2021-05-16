@@ -23,12 +23,15 @@ func RenderSteps(r int, c int, grid [][]int, steps [][]int, table *tview.Table) 
 			visible := steps[ri][ci]
 			if visible == 1 {
 				text := fmt.Sprintf(" %d ", value)
+				cell := table.GetCell(ri, ci)
+				cell.SetTextColor(tcell.ColorBlue)
 				if value == -1 {
+					cell.SetTextColor(tcell.ColorRed)
 					text = " B "
 				} else if value == 0 {
 					text = "   "
 				}
-				table.GetCell(ri, ci).SetText(text).SetTextColor(tcell.ColorRed)
+				cell.SetText(text)
 			}
 		}
 	}
