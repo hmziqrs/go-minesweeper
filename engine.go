@@ -24,6 +24,7 @@ func GenerateGrid(r, c, m int) ([][]int, [][]int) {
 			continue
 		} else {
 			grid[ri][ci] = -1
+			count++
 		}
 	}
 
