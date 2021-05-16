@@ -13,6 +13,7 @@ func RenderGrid(r int, c int, table *tview.Table) {
 			table.SetCell(ri, ci, tview.NewTableCell(" X ").SetMaxWidth(10))
 		}
 	}
+	table.SetSelectable(true, true)
 }
 
 func RenderSteps(r int, c int, grid [][]int, steps [][]int, table *tview.Table) {
@@ -34,15 +35,15 @@ func RenderSteps(r int, c int, grid [][]int, steps [][]int, table *tview.Table) 
 }
 
 func DifficultySelectModal(handler func(row, column int)) tview.Primitive {
-	modal := func(p tview.Primitive, width, height int) tview.Primitive {
-		return tview.NewFlex().
-			AddItem(nil, 0, 1, false).
-			AddItem(tview.NewFlex().SetDirection(tview.FlexRow).
-				AddItem(nil, 0, 1, false).
-				AddItem(p, height, 1, false).
-				AddItem(nil, 0, 1, false), width, 1, false).
-			AddItem(nil, 0, 1, false)
-	}
+	// modal := func(p tview.Primitive, width, height int) tview.Primitive {
+	// 	return tview.NewFlex().
+	// 		AddItem(nil, 0, 1, false).
+	// 		AddItem(tview.NewFlex().SetDirection(tview.FlexRow).
+	// 			AddItem(nil, 0, 1, false).
+	// 			AddItem(p, height, 1, false).
+	// 			AddItem(nil, 0, 1, false), width, 1, false).
+	// 		AddItem(nil, 0, 1, false)
+	// }
 
 	table := tview.NewTable().SetBorders(true)
 	for i, d := range Difficulties {
@@ -50,6 +51,7 @@ func DifficultySelectModal(handler func(row, column int)) tview.Primitive {
 	}
 	table.SetSelectable(true, true).SetFixed(1, 1).SetSelectedFunc(handler)
 
-	return modal(table, 100, 100)
+	// return modal(table, 100, 100)
+	return table
 
 }

@@ -13,17 +13,11 @@ func main() {
 	moves := 0
 	// didWon := false
 
-	grid := make([][]int, r+1)
-	steps := make([][]int, r+1)
-
-	GenerateGrid(r, c, grid, steps)
+	var grid, steps [][]int
 
 	app := tview.NewApplication()
 	table := tview.NewTable().SetBorders(true)
 
-	RenderGrid(r, c, table)
-
-	table.SetSelectable(true, true)
 	table.Select(0, 0).SetFixed(1, 1).SetSelectedFunc(func(ri int, ci int) {
 		moves++
 		key := grid[ri][ci]
@@ -39,8 +33,19 @@ func main() {
 		}
 		RenderSteps(r, c, grid, steps, table)
 	})
+	pages := tview.NewPages()
+	menu := DifficultySelectModal(func(row, _ int) {
+		d := Difficulties[row]
+		r = d.R
+		r = d.C
+		grid, steps = GenerateGrid(r, c)
+		RenderGrid(r, c, table)
+		pages.SwitchToPage("game")
+	})
+	pages.AddPage("game", table, true, false)
+	pages.AddPage("menu", menu, true, true)
 
-	if err := app.SetRoot(table, true).EnableMouse(true).Run(); err != nil {
+	if err := app.SetRoot(pages, true).EnableMouse(true).Run(); err != nil {
 		panic(err)
 	}
 

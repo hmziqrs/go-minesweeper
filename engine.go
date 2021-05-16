@@ -5,7 +5,9 @@ import (
 	"time"
 )
 
-func GenerateGrid(r int, c int, grid [][]int, steps [][]int) {
+func GenerateGrid(r int, c int) ([][]int, [][]int) {
+	grid := make([][]int, r+1)
+	steps := make([][]int, r+1)
 	for ri := 0; ri <= r; ri++ {
 		grid[ri] = make([]int, c+1)
 		steps[ri] = make([]int, c+1)
@@ -40,6 +42,8 @@ func GenerateGrid(r int, c int, grid [][]int, steps [][]int) {
 			grid[ri][ci] = count
 		}
 	}
+
+	return grid, steps
 }
 
 func ShowAllMines(r int, c int, grid [][]int, steps [][]int) {
