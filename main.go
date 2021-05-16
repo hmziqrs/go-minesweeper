@@ -9,6 +9,7 @@ import (
 func main() {
 	r := 9
 	c := 9
+	m := 10
 	gameover := false
 	moves := 0
 	// didWon := false
@@ -37,8 +38,9 @@ func main() {
 	menu := DifficultySelectModal(func(row, _ int) {
 		d := Difficulties[row]
 		r = d.R
-		r = d.C
-		grid, steps = GenerateGrid(r, c)
+		c = d.C
+		m = d.M
+		grid, steps = GenerateGrid(r, c, m)
 		RenderGrid(r, c, table)
 		pages.SwitchToPage("game")
 	})

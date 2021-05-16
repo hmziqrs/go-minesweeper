@@ -47,7 +47,7 @@ func DifficultySelectModal(handler func(row, column int)) tview.Primitive {
 
 	table := tview.NewTable().SetBorders(true)
 	for i, d := range Difficulties {
-		table.SetCell(i, 0, tview.NewTableCell(fmt.Sprintf("%s: %dx%d grid with %d mines", d.Label, d.R, d.C, d.B)))
+		table.SetCell(i, 0, tview.NewTableCell(fmt.Sprintf("%s: %dx%d grid with %d mines", d.Label, d.R, d.C, d.M)))
 	}
 	table.SetSelectable(true, true).SetFixed(1, 1).SetSelectedFunc(handler)
 

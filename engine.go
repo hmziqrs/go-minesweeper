@@ -5,19 +5,25 @@ import (
 	"time"
 )
 
-func GenerateGrid(r int, c int) ([][]int, [][]int) {
+func GenerateGrid(r, c, m int) ([][]int, [][]int) {
+	count := 0
+
 	grid := make([][]int, r+1)
 	steps := make([][]int, r+1)
 	for ri := 0; ri <= r; ri++ {
 		grid[ri] = make([]int, c+1)
 		steps[ri] = make([]int, c+1)
-		for ci := 0; ci <= c; ci++ {
-			rand.Seed(time.Now().UnixNano() + int64(ri+ci))
-			random := rand.Intn(5)
-			// fmt.Println("Check %d", random)
-			if random == 1 {
-				grid[ri][ci] = -1
-			}
+	}
+
+	for count < m {
+		rand.Seed(time.Now().UnixNano() + int64(count))
+		ri := rand.Intn(r)
+		ci := rand.Intn(c)
+		key := grid[ri][ci]
+		if key == -1 {
+			continue
+		} else {
+			grid[ri][ci] = -1
 		}
 	}
 
