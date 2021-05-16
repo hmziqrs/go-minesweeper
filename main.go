@@ -43,14 +43,6 @@ func main() {
 			ShowAllMines(r, c, grid, steps)
 		}
 		RenderSteps(r, c, grid, steps, table)
-
-		// 		key := grid[ri][ci]
-		// char := fmt.Sprintf(" %d ", key)
-		// if key == -1 {
-		// 	char = " B "
-		// }
-
-		// table.GetCell(ri, ci).SetTextColor(tcell.ColorRed).SetText(char)
 	})
 	if err := app.SetRoot(table, true).EnableMouse(true).Run(); err != nil {
 		panic(err)

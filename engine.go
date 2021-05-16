@@ -29,7 +29,7 @@ func GenerateGrid(r int, c int, grid [][]int, steps [][]int) {
 				for nci := -1; nci <= 1; nci++ {
 					cri := ri + nri
 					cci := ci + nci
-					if cri < 0 || cri > r || cci < 0 || cci > c || (cri == 0 && cci == 0) {
+					if cri < 0 || cri > r || cci < 0 || cci > c || (nri == 0 && nci == 0) {
 						continue
 					}
 					if grid[cri][cci] == -1 {
@@ -54,156 +54,25 @@ func ShowAllMines(r int, c int, grid [][]int, steps [][]int) {
 }
 
 func CalculatePaths(sri int, sci int, r int, c int, grid [][]int, steps [][]int) {
-	if sri > 0 {
-		for ri := sri; ri >= 0; ri-- {
-			key := grid[ri][sci]
+	for nri := -1; nri <= 1; nri++ {
+		for nci := -1; nci <= 1; nci++ {
+			cri := sri + nri
+			cci := sci + nci
+			if cri < 0 || cri > r || cci < 0 || cci > c {
+				continue
+			}
+
+			key := grid[cri][cci]
+			if steps[cri][cci] == 1 {
+				continue
+			}
+
 			if key == -1 {
-				break
+				continue
 			}
-			steps[ri][sci] = 1
-			if key > 0 {
-				break
-			}
-
-			if sci > 0 {
-				for ci := sci; ci >= 0; ci-- {
-					key := grid[ri][ci]
-					if key == -1 {
-						break
-					}
-					steps[ri][ci] = 1
-					if key > 0 {
-						break
-					}
-				}
-			}
-
-			if sci < c {
-				for ci := sci; ci <= c; ci++ {
-					key := grid[ri][ci]
-					if key == -1 {
-						break
-					}
-					steps[ri][ci] = 1
-					if key > 0 {
-						break
-					}
-				}
-			}
-		}
-	}
-
-	if sri < r {
-		for ri := sri; ri <= r; ri++ {
-			key := grid[ri][sci]
-			if key == -1 {
-				break
-			}
-			steps[ri][sci] = 1
-			if key > 0 {
-				break
-			}
-
-			if sci > 0 {
-				for ci := sci; ci >= 0; ci-- {
-					key := grid[ri][ci]
-					if key == -1 {
-						break
-					}
-					steps[ri][ci] = 1
-					if key > 0 {
-						break
-					}
-				}
-			}
-
-			if sci < c {
-				for ci := sci; ci <= c; ci++ {
-					key := grid[ri][ci]
-					if key == -1 {
-						break
-					}
-					steps[ri][ci] = 1
-					if key > 0 {
-						break
-					}
-				}
-			}
-		}
-	}
-
-	if sci > 0 {
-		for ci := sci; ci >= 0; ci-- {
-			key := grid[sri][ci]
-			if key == -1 {
-				break
-			}
-			steps[sri][ci] = 1
-			if key > 0 {
-				break
-			}
-
-			if sri > 0 {
-				for ri := sri; ri >= 0; ri-- {
-					key := grid[ri][ci]
-					if key == -1 {
-						break
-					}
-					steps[ri][ci] = 1
-					if key > 0 {
-						break
-					}
-				}
-			}
-			if sri < r {
-				for ri := sri; ri <= r; ri++ {
-					key := grid[ri][ci]
-					if key == -1 {
-						break
-					}
-					steps[ri][ci] = 1
-					if key > 0 {
-						break
-					}
-				}
-			}
-		}
-	}
-
-	if sci < c {
-		for ci := sci; ci <= c; ci++ {
-			key := grid[sri][ci]
-			if key == -1 {
-				break
-			}
-			steps[sri][ci] = 1
-			if key > 0 {
-				break
-			}
-
-			if sri > 0 {
-				for ri := sri; ri >= 0; ri-- {
-					key := grid[ri][ci]
-					if key == -1 {
-						break
-					}
-					steps[ri][ci] = 1
-					if key > 0 {
-						break
-					}
-				}
-			}
-			if sri < r {
-				for ri := sri; ri <= r; ri++ {
-					key := grid[ri][ci]
-					if key == -1 {
-						break
-					}
-					steps[ri][ci] = 1
-					if key > 0 {
-						break
-					}
-				}
+			steps[cri][cci] = 1
+			if key == 0 {
+				CalculatePaths(cri, cci, r, c, grid, steps)
 			}
 		}
 	}
