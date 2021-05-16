@@ -33,9 +33,23 @@ func RenderSteps(r int, c int, grid [][]int, steps [][]int, table *tview.Table) 
 	}
 }
 
-// func DifficultySelectModal() *tview.Modal {
-// 	// modal := tview.NewModal().SetText("Select difficulty").AddButtons(Difficulties)
+func DifficultySelectModal(handler func(row, column int)) tview.Primitive {
+	modal := func(p tview.Primitive, width, height int) tview.Primitive {
+		return tview.NewFlex().
+			AddItem(nil, 0, 1, false).
+			AddItem(tview.NewFlex().SetDirection(tview.FlexRow).
+				AddItem(nil, 0, 1, false).
+				AddItem(p, height, 1, false).
+				AddItem(nil, 0, 1, false), width, 1, false).
+			AddItem(nil, 0, 1, false)
+	}
 
-// 	// return modal
+	table := tview.NewTable().SetBorders(true)
+	for i, d := range Difficulties {
+		table.SetCell(i, 0, tview.NewTableCell(fmt.Sprintf("%s: %dx%d grid with %d mines", d.Label, d.R, d.C, d.B)))
+	}
+	table.SetSelectable(true, true).SetFixed(1, 1).SetSelectedFunc(handler)
 
-// }
+	return modal(table, 100, 100)
+
+}
