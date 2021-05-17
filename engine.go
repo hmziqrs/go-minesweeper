@@ -53,6 +53,21 @@ func GenerateGrid(r, c, m int) ([][]int, [][]int) {
 	return grid, steps
 }
 
+func DidFinish(r int, c int, grid [][]int, steps [][]int) bool {
+	for ri := 0; ri <= r; ri++ {
+		for ci := 0; ci <= c; ci++ {
+			key := grid[ri][ci]
+			visible := steps[ri][ci]
+			if key != -1 && visible == 0 {
+				return false
+			}
+		}
+	}
+
+	return true
+
+}
+
 func ShowAllMines(r int, c int, grid [][]int, steps [][]int) {
 	for ri := 0; ri <= r; ri++ {
 		for ci := 0; ci <= c; ci++ {

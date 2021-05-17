@@ -10,7 +10,6 @@ func main() {
 	r := 9
 	c := 9
 	m := 10
-	gameover := false
 	moves := 0
 	// didWon := false
 
@@ -22,6 +21,7 @@ func main() {
 
 	table.SetSelectedFunc(func(ri int, ci int) {
 		moves++
+		gameover := false
 		key := grid[ri][ci]
 		if key == -1 {
 			gameover = true
@@ -32,7 +32,7 @@ func main() {
 		}
 		if gameover {
 			ShowAllMines(r, c, grid, steps)
-			ShowModal(pages, "gameover", "Gameover", []string{"Quit", "Try again", "Change Difficulty"}, func(i int, _ string) {
+			ShowModal(pages, "gameover", "Gameover", []string{"Quit", "Try again", "Change difficulty"}, func(i int, _ string) {
 				gameover = false
 				if i == 0 {
 					app.Stop()
@@ -48,6 +48,22 @@ func main() {
 			})
 		}
 		RenderSteps(r, c, grid, steps, table)
+		if !gameover && DidFinish(r, c, grid, steps) {
+			title := fmt.Sprintf("Congrats! You finished the game in %d moves", moves)
+			ShowModal(pages, "finish", title, []string{"Quit", "Play again", "Change difficulty"}, func(i int, _ string) {
+				if i == 0 {
+					app.Stop()
+				} else if i == 1 {
+					grid, steps = GenerateGrid(r, c, m)
+					RenderGrid(r, c, table)
+					pages.RemovePage("finish")
+				} else {
+					pages.RemovePage("finish")
+					pages.SwitchToPage("menu")
+				}
+
+			})
+		}
 
 	})
 	menu := DifficultySelectPage(func(row, _ int) {
