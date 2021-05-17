@@ -1,0 +1,54 @@
+on:
+  push:
+    tags:
+      - '*'
+
+name: Release Builds
+jobs:
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          $env:GOOS = "windows"
+          $env:GORCH = "amd64" 
+          go build -o build/minesweeper.exe
+      - name: Windows release build for github
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: 'build/minesweeper.exe'
+          token: ${{ secrets.TOKEN }}
+          allowUpdates: true
+
+  linux:
+    name: Linux
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          GOOS=linux
+          GORCH=amd64
+          go build -o build/minesweeper
+      - name: linux release build for github
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: 'build/minesweeper'
+          token: ${{ secrets.TOKEN }}
+          allowUpdates: true
+
+  macos:
+    name: MacOS
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          GOOS=darwin
+          GORCH=amd64
+          go build -o build/minesweeper
+      - name: macos release build for github
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: 'build/minesweeper'
+          token: ${{ secrets.TOKEN }}
+          allowUpdates: true
