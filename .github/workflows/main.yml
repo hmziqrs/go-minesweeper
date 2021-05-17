@@ -11,8 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          $env:GOOS = "windows"
-          $env:GORCH = "amd64" 
           go build -o build/minesweeper.exe
       - name: Windows release build for github
         uses: ncipollo/release-action@v1
@@ -27,8 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          GOOS=linux
-          GORCH=amd64
           go build -o build/minesweeper-linux
       - name: linux release build for github
         uses: ncipollo/release-action@v1
@@ -43,8 +39,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          GOOS=darwin
-          GORCH=amd64
           go build -o build/minesweeper-macos
       - name: macos release build for github
         uses: ncipollo/release-action@v1
