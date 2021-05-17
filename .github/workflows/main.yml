@@ -29,11 +29,11 @@ jobs:
       - run: |
           GOOS=linux
           GORCH=amd64
-          go build -o build/minesweeper
+          go build -o build/minesweeper-linux
       - name: linux release build for github
         uses: ncipollo/release-action@v1
         with:
-          artifacts: 'build/minesweeper'
+          artifacts: 'build/minesweeper-linux'
           token: ${{ secrets.TOKEN }}
           allowUpdates: true
 
@@ -45,10 +45,10 @@ jobs:
       - run: |
           GOOS=darwin
           GORCH=amd64
-          go build -o build/minesweeper
+          go build -o build/minesweeper-macos
       - name: macos release build for github
         uses: ncipollo/release-action@v1
         with:
-          artifacts: 'build/minesweeper'
+          artifacts: 'build/minesweeper-macos'
           token: ${{ secrets.TOKEN }}
           allowUpdates: true
