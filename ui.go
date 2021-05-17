@@ -13,7 +13,7 @@ func RenderGrid(r int, c int, table *tview.Table) {
 			table.SetCell(ri, ci, tview.NewTableCell(" X ").SetMaxWidth(10))
 		}
 	}
-	table.SetSelectable(true, true)
+	table.SetSelectable(true, true).Select(0, 0).SetFixed(1, 1)
 }
 
 func RenderSteps(r int, c int, grid [][]int, steps [][]int, table *tview.Table) {
@@ -37,7 +37,7 @@ func RenderSteps(r int, c int, grid [][]int, steps [][]int, table *tview.Table) 
 	}
 }
 
-func DifficultySelectModal(handler func(row, column int)) tview.Primitive {
+func DifficultySelectPage(handler func(row, column int)) tview.Primitive {
 	// modal := func(p tview.Primitive, width, height int) tview.Primitive {
 	// 	return tview.NewFlex().
 	// 		AddItem(nil, 0, 1, false).
@@ -57,4 +57,18 @@ func DifficultySelectModal(handler func(row, column int)) tview.Primitive {
 	// return modal(table, 100, 100)
 	return table
 
+}
+
+// ShowModal : Convenience function to create a modal.
+func ShowModal(pages *tview.Pages, label, text string, buttons []string, f func(buttonIndex int, buttonLabel string)) {
+	m := tview.NewModal()
+	// Set modal attributes
+	m.SetText(text).
+		AddButtons(buttons).
+		SetDoneFunc(f).
+		SetFocus(0).
+		SetBackgroundColor(tcell.ColorDarkSlateGrey)
+
+	pages.AddPage(label, m, true, false)
+	pages.ShowPage(label)
 }

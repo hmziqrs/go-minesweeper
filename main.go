@@ -18,8 +18,9 @@ func main() {
 
 	app := tview.NewApplication()
 	table := tview.NewTable().SetBorders(true)
+	pages := tview.NewPages()
 
-	table.Select(0, 0).SetFixed(1, 1).SetSelectedFunc(func(ri int, ci int) {
+	table.SetSelectedFunc(func(ri int, ci int) {
 		moves++
 		key := grid[ri][ci]
 		if key == -1 {
@@ -31,11 +32,25 @@ func main() {
 		}
 		if gameover {
 			ShowAllMines(r, c, grid, steps)
+			ShowModal(pages, "gameover", "Gameover", []string{"Quit", "Try again", "Change Difficulty"}, func(i int, _ string) {
+				gameover = false
+				if i == 0 {
+					app.Stop()
+				} else if i == 1 {
+					grid, steps = GenerateGrid(r, c, m)
+					RenderGrid(r, c, table)
+					pages.RemovePage("gameover")
+				} else {
+					pages.RemovePage("gameover")
+					pages.SwitchToPage("menu")
+				}
+
+			})
 		}
 		RenderSteps(r, c, grid, steps, table)
+
 	})
-	pages := tview.NewPages()
-	menu := DifficultySelectModal(func(row, _ int) {
+	menu := DifficultySelectPage(func(row, _ int) {
 		d := Difficulties[row]
 		r = d.R
 		c = d.C
