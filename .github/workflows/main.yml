@@ -26,6 +26,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           go build -o build/minesweeper-linux
+          chmod 777 minesweeper-linux
       - name: linux release build for github
         uses: ncipollo/release-action@v1
         with:
@@ -40,6 +41,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: |
           go build -o build/minesweeper-macos
+          chmod 777 minesweeper-macos
       - name: macos release build for github
         uses: ncipollo/release-action@v1
         with:
