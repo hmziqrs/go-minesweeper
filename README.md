@@ -20,7 +20,8 @@ One day I couldn't sleep for some reasons. So, to clear out my boredom I decided
 
 ## How to build
 
-> Or you can download directly from tag section of github repository for your OS
+> Or you can download directly from tag section of github repository for your OS.
+> If you download the binary from tags you have to chmod the binary `chmod 777 ./minesweeper-macos` or `chmod 777 ./minesweeper-linux` based on your os
 
 - `go build -o minesweeper`
 - `./minesweeper`
