@@ -82,5 +82,5 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println("Helloww World")
+	fmt.Println("Thank you for playing")
 }
