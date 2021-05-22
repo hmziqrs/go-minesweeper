@@ -2,6 +2,8 @@
 
 > ## Basic implementation of minesweeper game in CLI built with golang
 
+![Go minesweeper demo](assets/demo.gif)
+
 ## Motivation
 
 One day I couldn't sleep for some reasons. So, to clear out my boredom I decided to write basic random mines + counting mines for fun, Which did helped to sleep that night. Also I wanted to learn how to work with terminal UI & it was while since I wrote some go code. Well whole thing turns out to be a great experience.
