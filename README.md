@@ -6,11 +6,11 @@
 
 ## Motivation
 
-One day I couldn't sleep for some reasons. So, to clear out my boredom I decided to write basic random mines + counting mines for fun, Which did helped to sleep that night. Also I wanted to learn how to work with terminal UI & it was while since I wrote some go code. Well whole thing turns out to be a great experience.
+One day I could not sleep for some reason. So, to clear out my boredom I decided to write basic random mines + counting mines for fun, Which did help to sleep that night. Also, I wanted to learn how to work with terminal UI & it was a while since I wrote some go code. Well, the whole thing turns out to be a great learning experience.
 
 ## Requirements to run
 
-> I'm not sure if old go version will work but you can try
+> I am not sure if the old go version will work but you can try.
 
 - Go 1.16+
 
@@ -20,15 +20,15 @@ One day I couldn't sleep for some reasons. So, to clear out my boredom I decided
 
 ## How to build
 
-> Or you can download directly from tag section of github repository for your OS.
-> If you download the binary from tags you have to chmod the binary `chmod 777 ./minesweeper-macos` or `chmod 777 ./minesweeper-linux` based on your os
+> Or you can download directly from the <a href="/releases" target="_blank">release section</a> of the GitHub repository for your OS.
+> If you download the binary from tags you have to chmod the binary chmod 777 ./minesweeper-macos or chmod 777 ./minesweeper-linux based on your os.
 
 - `go build -o minesweeper`
 - `./minesweeper`
 
 ## Code architecture
 
-> This is my first time writing small scale go project. So do let me know in issue if anything can be improved
+> This is my first time writing a small-scale go project. Please provide your feedback by raising an issue.
 
 - `constants.go` contains shared variables
 - `engine.go` contains all raw logic to calculate bombs, grid & bomb counts
